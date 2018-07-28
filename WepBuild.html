@@ -1,0 +1,152 @@
+<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+
+<html>
+
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+		<legend> <b>Basic Details</b> </legend>
+        <div class="pure-control-group">
+            <label for="id">Weapon ID</label>
+            <input id="id" type="text">
+        </div>
+		
+        <div class="pure-control-group">
+            <label for="name">Weapon Name</label>
+            <input id="name" type="text">
+        </div>
+
+        <div class="pure-control-group">
+            <label for="rarity">Weapon Rarity</label>
+            <input id="rarity" type="text">
+        </div>
+		
+        <div class="pure-control-group">
+            <label for="type">Type (0=gun, 1=mgc)</label>
+            <input id="type" type="text">
+        </div>
+		<legend> <b>Attack Details</b> </legend>
+        <div class="pure-control-group">
+            <label for="damage">Damage</label>
+            <input id="damage" type="text">
+        </div>
+		
+        <div class="pure-control-group">
+            <label for="firerate">Shots per second</label>
+            <input id="firerate" type="text">
+        </div>
+		
+        <div class="pure-control-group">
+            <label for="kb">Knockback</label>
+            <input id="kb" type="text">
+        </div>
+		
+        <div class="pure-control-group">
+            <label for="range">Range</label>
+            <input id="range" type="text">
+        </div>
+	
+        <div class="pure-control-group">
+            <label for="inac">Inaccuracy</label>
+            <input id="inac" type="text">
+        </div>
+		
+        <div class="pure-control-group">
+            <label for="minspd">Projectile Speed Min</label>
+            <input id="minspd" type="text">
+        </div>
+		
+        <div class="pure-control-group">
+            <label for="maxspd">Projectile Speed Max</label>
+            <input id="maxspd" type="text">
+        </div>
+		
+        <div class="pure-control-group">
+            <label for="shottype">Shot Type</label>
+            <input id="shottype" type="text">
+        </div>
+		
+        <div class="pure-control-group">
+            <label for="element">Element</label>
+            <input id="element" type="text">
+        </div>
+		
+		<legend> <b>Extra Details (refer to doc)</b> </legend>
+        <div class="pure-control-group">
+            <label for="extra1">Extra 1</label>
+            <input id="extra1" type="text">
+        </div>
+        <div class="pure-control-group">
+            <label for="extra2">Extra 2</label>
+            <input id="extra2" type="text">
+        </div>
+	        <div class="pure-control-group">
+            <label for="extra3">Extra 3</label>
+            <input id="extra3" type="text">
+        </div>
+		Notes:
+		<textarea class="pure-input-1-2" id="notes"></textarea>
+	</fieldset>
+ <button type="button" class="pure-button pure-button-primary" onclick="button()">Submit</button>
+ 
+<textarea class="pure-input-1-2" id="out"></textarea>
+</form>
+</html>
+
+<script>
+function button() {
+	var out = '';
+	var id = document.getElementById("id").value;
+	var name = document.getElementById("name").value;
+	var rarity = document.getElementById("rarity").value;
+	
+	var type = document.getElementById("type").value;
+	var damage = document.getElementById("damage").value;
+	var firerate = document.getElementById("firerate").value;
+	var projspeed = document.getElementById("minspd").value;
+	var shottype = document.getElementById("shottype").value;
+	var kb = document.getElementById("kb").value;
+	var range = document.getElementById("range").value;
+	var element = document.getElementById("element").value;
+	var inacc = document.getElementById("inac").value;
+
+///@param ID
+///@param ammotype
+///@param damage
+///@param firerate
+///@param projspeed
+///@param shottype
+///@param knockback
+///@param range
+///@param element
+///@param inacc
+
+	
+	var notes = document.getElementById("notes").value;
+	if(notes != "") {
+		out += "/* notes: \n"+notes+" */\n"
+	}
+	out += "weapon_set_visual("+id+', "'+name+'", s_weapon_pistol, 0); // TODO: change sprite';
+	out += "\n";
+	out += "weapon_set_attack("+id+", "+type+", "+damage+", "+firerate+", "+projspeed+", "+shottype+", "+kb+", "+range+", "+element+", "+inacc+");";
+	out += "\n";
+	var maxspd = document.getElementById("maxspd").value;
+	if(maxspd != projspeed) {
+		out += "weapon_set_override_speed("+id+", "+projspeed+", "+maxspd+");";
+		out += "\n";
+	}
+	
+	var spec1 = document.getElementById("extra1").value;
+	if(spec1 != "") {
+		var spec2 = document.getElementById("extra2").value;
+		if(spec2 == "") spec2 = "0";
+		var spec3 = document.getElementById("extra3").value;
+		if(spec3 == "") spec3 = "0";
+		out += "weapon_set_special("+spec1+", "+spec2+", "+spec3+");";
+		out += "\n";
+	}
+	
+	document.getElementById("out").value = out;
+}
+
+
+</script>
