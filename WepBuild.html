@@ -70,6 +70,11 @@
             <input id="element" type="text">
         </div>
 		
+        <div class="pure-control-group">
+            <label for="ammo">Ammo Consumed</label>
+            <input id="ammo" type="text">
+        </div>
+		
 		<legend> <b>Extra Details (refer to doc)</b> </legend>
         <div class="pure-control-group">
             <label for="extra1">Extra 1</label>
@@ -99,6 +104,8 @@ function button() {
 	var name = document.getElementById("name").value;
 	var rarity = document.getElementById("rarity").value;
 	
+	var spritename = "s_weapon_"+name.replace(new RegExp(" ", 'g'), "_");
+	
 	var type = document.getElementById("type").value;
 	var damage = document.getElementById("damage").value;
 	var firerate = document.getElementById("firerate").value;
@@ -108,6 +115,7 @@ function button() {
 	var range = document.getElementById("range").value;
 	var element = document.getElementById("element").value;
 	var inacc = document.getElementById("inac").value;
+	var ammo = document.getElementById("ammo").value;
 
 ///@param ID
 ///@param ammotype
@@ -127,7 +135,7 @@ function button() {
 	}
 	out += "weapon_set_visual("+id+', "'+name+'", s_weapon_pistol, 0, 0); // TODO: change sprite';
 	out += "\n";
-	out += "weapon_set_attack("+id+", "+type+", "+damage+", "+firerate+", "+projspeed+", "+shottype+", "+kb+", "+range+", "+element+", "+inacc+");";
+	out += "weapon_set_attack("+id+", "+type+", "+damage+", "+firerate+", "+projspeed+", "+shottype+", "+kb+", "+range+", "+element+", "+inacc+", "+ammo+");";
 	out += "\n";
 	var maxspd = document.getElementById("maxspd").value;
 	if(maxspd != projspeed) {
@@ -141,7 +149,7 @@ function button() {
 		if(spec2 == "") spec2 = "0";
 		var spec3 = document.getElementById("extra3").value;
 		if(spec3 == "") spec3 = "0";
-		out += "weapon_set_special("+spec1+", "+spec2+", "+spec3+");";
+		out += "weapon_set_special("+id+", "+spec1+", "+spec2+", "+spec3+");";
 		out += "\n";
 	}
 	
