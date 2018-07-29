@@ -125,7 +125,7 @@ function button() {
 	if(notes != "") {
 		out += "/* notes: \n"+notes+" */\n"
 	}
-	out += "weapon_set_visual("+id+', "'+name+'", s_weapon_pistol, 0); // TODO: change sprite';
+	out += "weapon_set_visual("+id+', "'+name+'", s_weapon_pistol, 0, 0); // TODO: change sprite';
 	out += "\n";
 	out += "weapon_set_attack("+id+", "+type+", "+damage+", "+firerate+", "+projspeed+", "+shottype+", "+kb+", "+range+", "+element+", "+inacc+");";
 	out += "\n";
