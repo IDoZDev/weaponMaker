@@ -31,17 +31,25 @@ Decimal, number of pixels travelled by projectile per frame; starting pistol is 
 
 ### Shot type:
 Integer to represent shottypes. So far shottypes are:
+
 0 = normal shot,
+
 1 = shotgun
 
 ### Element:
 Integer, so far are:
+
 0 = none,
+
 1 = fire,
+
 2 = ice,
+
 3 = electric
 
 ### Extras
 Depends on the given shottype. 
+
 0 = NO ARGUMENTS
+
 1 = Number of projectiles,n/a,n/a
